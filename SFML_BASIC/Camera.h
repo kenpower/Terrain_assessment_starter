@@ -90,7 +90,8 @@ public:
     }
  
 };
- 
+
+//create some default vectors
 aiVector3D Camera::zero(0.0f);
 aiVector3D Camera::yaxis(0.0f,1.0f,0.0f);
 aiVector3D Camera::zaxis(0.0f,0.0f,1.0f);

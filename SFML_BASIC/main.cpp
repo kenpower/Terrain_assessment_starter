@@ -39,12 +39,13 @@ int main()
     // Create a clock for measuring time elapsed     
     sf::Clock Clock; 
 
+	aiVector3D position(0,10,-30);
 	Camera camera;
-    camera.Init(); //create a camera
+    camera.Init(position); //create a camera
       
     //prepare OpenGL surface for HSR 
     glClearDepth(1.f); 
-    glClearColor(0.3f, 0.3f, 0.3f, 0.f); //background colour
+    glClearColor(0.3f, 0.3f, 0.6f, 0.f); //background colour
     glEnable(GL_DEPTH_TEST); 
     glDepthMask(GL_TRUE); 
    
@@ -60,13 +61,16 @@ int main()
 
 	//load & bind the shader
 	sf::Shader shader;
+	//all the lighting & texture blending code should  be put in 'fragment.glsl'
 	if(!shader.loadFromFile("vertex.glsl","fragment.glsl")){
         exit(1);
     }
 	sf::Shader::bind(&shader);
 
+	//Create our Terrain
 	Terrain terrain;
 	terrain.Init();
+
     // Start game loop 
     while (App.isOpen()) 
     { 
@@ -85,7 +89,7 @@ int main()
 			//update the camera
 			camera.Update(Event);
  
-            }
+            
     
         } 
            
@@ -94,19 +98,23 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
    
         // Apply some transformations 
-        glMatrixMode(GL_MODELVIEW); 
+        //initialise the worldview matrix
+		glMatrixMode(GL_MODELVIEW); 
         glLoadIdentity(); 
 
-
+		//get the viewing transform from the camera
 		camera.ViewingTransform();
 
-		static float ang=0.0;
+
+		//make the world spin
 		//TODO:probably should remove this in final
+		static float ang=0.0;
+		ang+=0.01f;
 		glRotatef(ang*2,0,1,0);//spin about y-axis
 		
 
-		ang+=0.01f;
-
+		
+		//draw the world
 		terrain.Draw();
 
 		   
