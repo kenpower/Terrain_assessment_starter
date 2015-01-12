@@ -82,32 +82,8 @@ int main()
             if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape)) 
                 App.close(); 
              
-			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::D)){
-                camera.MoveLeftRight(+1);
-            }
-
-			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::A)){
-                camera.MoveLeftRight(-1);
-            }
- 
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::W)){
-                camera.MoveForwardBack(1);
-            }
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::S)){
-                camera.MoveForwardBack(-1);
-            }
- 
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Right)){
-                camera.TurnRightLeft(1);
-            }
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Left)){
-                camera.TurnRightLeft(-1);
-            }
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Up)){
-                camera.TurnUpDown(1);
-            }
-            if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Down)){
-                camera.TurnUpDown(-1);
+			//update the camera
+			camera.Update(Event);
  
             }
     
