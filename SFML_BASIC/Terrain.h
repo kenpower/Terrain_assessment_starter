@@ -13,6 +13,7 @@ class Terrain
 	vector *vertices;
 	vector *colors;
 
+	float getHeight(float x, float y);
 	void setPoint(vector, float, float,float);
 	
 public:

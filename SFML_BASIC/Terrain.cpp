@@ -40,6 +40,23 @@ void Terrain::setPoint(vector v,float x, float y, float z){
 		v[2]=z;
 }
 
+//helper function to calculate height of terrain at a given point in space
+//you will need to modify this significantly to pull height from a map
+float  Terrain::getHeight(float x, float y){
+
+	//for the sample we will calculate height based on distance form origin
+	float dist=sqrt(x*x+y*y);
+
+	//center will be the highest point
+	dist=30-dist;
+	//put a nice curve in it
+	dist*=dist;
+	dist*=dist;
+	//whoah, way to high, make it smaller
+	dist/=50000;
+
+	return dist;
+}
 
 void Terrain::Init(){
 	
@@ -71,15 +88,15 @@ void Terrain::Init(){
 				 */
 			//tri1
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
-			setPoint(vertices[vertexNum++],left,std::cos(front),front);
+			setPoint(vertices[vertexNum++],left,getHeight(left,front),front);
 
 
 
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
-			setPoint(vertices[vertexNum++],right,std::cos(front),front);
+			setPoint(vertices[vertexNum++],right,getHeight(right,front),front);
 
 			setPoint(colors[vertexNum],(rand()%255)/255.0,(rand()%255)/255.0,(rand()%255)/255.0);
-			setPoint(vertices[vertexNum++],right,std::cos(back),back);
+			setPoint(vertices[vertexNum++],right,getHeight(right,back),back);
 
 
 			//declare a degenerate triangle
